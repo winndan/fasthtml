@@ -31,7 +31,8 @@ def get_registration():
 
 @rt("/register")
 def post_registration(user: User):
-    """Handle user registration with Supabase"""
+    """Handle user registration with Supabase."""
+    print("Received registration request for user:", user.email)  # Debugging
     return handle_registration(supabase, user)
 
 @rt("/logout")
@@ -44,7 +45,7 @@ def post_logout():
         return Div(f"Error during logout: {str(e)}", style="color: red;")
 
 # Pass 'rt' and 'supabase' to the dashboard and login modules to define their routes
-dashboard.define_routes(rt)
+dashboard.define_routes(rt, supabase)
 login.define_routes(rt, supabase)
 
 serve()
